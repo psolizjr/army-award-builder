@@ -69,6 +69,69 @@
 
         .content {
             padding: 40px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .reference-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        .reference-sidebar h3 {
+            color: #1e3c72;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .reference-category {
+            margin-bottom: 20px;
+        }
+
+        .reference-category h4 {
+            color: #495057;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .reference-list {
+            color: #666;
+            line-height: 1.8;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .reference-list li {
+            padding: 3px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .reference-sidebar {
+                position: static;
+                width: 100%;
+                order: -1;
+            }
         }
 
         .step {
@@ -433,6 +496,7 @@
         </div>
 
         <div class="content">
+            <div class="main-content">
             <!-- Step 1: Award Setup -->
             <div class="step active" data-step="1">
                 <div class="step-header">
@@ -559,54 +623,29 @@
                 <div class="form-group">
                     <label>1. What was the scope or context?</label>
                     <span class="label-hint">Where/when did this happen? Keep it brief - just the setting.</span>
-                    <textarea id="achContext" rows="2" placeholder="as Range Officer-in-Charge for the battalion"></textarea>
-                    <div class="example" id="contextExample"></div>
+                    <textarea id="achContext" rows="2" placeholder="as Battalion Range Safety Officer for Annual Training"></textarea>
+                    <div class="example"><strong>Good examples:</strong> "as Platoon Sergeant during deployment to Kuwait" or "while serving as Company Executive Officer" or "across three subordinate battalions"</div>
                 </div>
 
                 <div class="form-group">
                     <label>2. What specific actions did the Soldier take?</label>
-                    <span class="label-hint">Start with a strong verb. Describe what they actually did.</span>
-                    <textarea id="achAction" rows="3" placeholder="Planned and executed weapons qualification operations, coordinating with range safety officers to ensure zero safety incidents"></textarea>
-                    <div class="example" id="actionExample"></div>
+                    <span class="label-hint">Write complete sentences. Start with a strong verb and describe what they actually did.</span>
+                    <textarea id="achAction" rows="3" placeholder="Planned and coordinated weapons qualification operations for 450 Soldiers across four companies, ensuring strict compliance with all safety protocols and range procedures"></textarea>
+                    <div class="example"><strong>Good examples:</strong> "Led squad-level training that improved readiness" or "Coordinated logistics support across multiple locations" or "Managed personnel accountability for 200 Soldiers"</div>
                 </div>
 
                 <div class="form-group">
                     <label>3. What measurable results were achieved?</label>
-                    <span class="label-hint">Give specific numbers, percentages, quantities. Be concrete.</span>
-                    <textarea id="achMetrics" rows="2" placeholder="qualified 300 Soldiers with 250 achieving expert marksmanship"></textarea>
-                    <div class="example" id="metricsExample"></div>
+                    <span class="label-hint">Give specific numbers, percentages, quantities. Be concrete and factual.</span>
+                    <textarea id="achMetrics" rows="2" placeholder="successfully qualified 450 Soldiers with 85% achieving expert marksmanship and zero safety incidents"></textarea>
+                    <div class="example"><strong>Good examples:</strong> "improved readiness from 70% to 92%" or "trained 150 Soldiers with 95% pass rate" or "managed $2.5M in equipment with zero losses"</div>
                 </div>
 
                 <div class="form-group">
                     <label>4. What was the mission impact?</label>
-                    <span class="label-hint">Why did this matter? Connect to readiness, mission, or unit capability.</span>
-                    <textarea id="achImpact" rows="2" placeholder="enhanced battalion weapons readiness and combat capability"></textarea>
-                    <div class="example" id="impactExample"></div>
-                </div>
-
-                <!-- Word Bank -->
-                <div class="word-bank">
-                    <h3>📝 Word Bank - Click to Insert</h3>
-                    
-                    <div class="word-category">
-                        <h4>Action Verbs</h4>
-                        <div class="word-tags" id="verbBank"></div>
-                    </div>
-
-                    <div class="word-category">
-                        <h4>Context/Scope Phrases</h4>
-                        <div class="word-tags" id="contextBank"></div>
-                    </div>
-
-                    <div class="word-category">
-                        <h4>Impact Phrases</h4>
-                        <div class="word-tags" id="impactBank"></div>
-                    </div>
-
-                    <div class="word-category">
-                        <h4>Connecting Words</h4>
-                        <div class="word-tags" id="connectingBank"></div>
-                    </div>
+                    <span class="label-hint">Why did this matter? Connect to readiness, mission capability, or unit effectiveness.</span>
+                    <textarea id="achImpact" rows="2" placeholder="enhanced battalion combat readiness and weapons proficiency"></textarea>
+                    <div class="example"><strong>Good examples:</strong> "strengthened unit deployment readiness" or "improved operational effectiveness" or "enhanced mission capability across the formation"</div>
                 </div>
 
                 <div class="loading" id="aiLoading">
@@ -652,7 +691,65 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </div><!-- End main-content -->
+
+            <!-- Reference Sidebar -->
+            <aside class="reference-sidebar">
+                <h3>📚 Quick Reference</h3>
+                
+                <div class="reference-category">
+                    <h4>Strong Action Verbs</h4>
+                    <ul class="reference-list">
+                        <li>Led • Directed • Managed</li>
+                        <li>Coordinated • Executed</li>
+                        <li>Established • Implemented</li>
+                        <li>Supervised • Oversaw</li>
+                        <li>Organized • Planned</li>
+                        <li>Trained • Mentored</li>
+                        <li>Improved • Enhanced</li>
+                        <li>Strengthened • Optimized</li>
+                        <li>Developed • Created</li>
+                        <li>Maintained • Ensured</li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h4>Context Phrases</h4>
+                    <ul class="reference-list">
+                        <li>as [position]</li>
+                        <li>while serving as</li>
+                        <li>during [event/operation]</li>
+                        <li>throughout [timeframe]</li>
+                        <li>across [units/area]</li>
+                        <li>in support of</li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h4>Impact Phrases</h4>
+                    <ul class="reference-list">
+                        <li>enhanced readiness</li>
+                        <li>improved effectiveness</li>
+                        <li>strengthened capability</li>
+                        <li>enabled mission success</li>
+                        <li>increased efficiency</li>
+                        <li>ensured mission accomplishment</li>
+                        <li>elevated standards</li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h4>Quantifiers</h4>
+                    <ul class="reference-list">
+                        <li>X Soldiers / personnel</li>
+                        <li>X% improvement</li>
+                        <li>zero incidents / losses</li>
+                        <li>$X in equipment / resources</li>
+                        <li>X units / elements</li>
+                    </ul>
+                </div>
+            </aside>
+        </div><!-- End content wrapper -->
     </div>
 
     <script>
@@ -793,87 +890,22 @@
                 const awardType = this.value;
                 if (awardType && awardData[awardType]) {
                     document.getElementById('awardGuidance').innerHTML = awardData[awardType].guidance;
-                    updateWordBank();
                     updateExamples();
                 }
             });
-
-            // Track active field for word bank insertion
-            ['achContext', 'achAction', 'achMetrics', 'achImpact'].forEach(id => {
-                const field = document.getElementById(id);
-                if (field) {
-                    field.addEventListener('focus', function() {
-                        activeField = this;
-                    });
-                }
-            });
         });
-
-        function updateWordBank() {
-            const awardType = document.getElementById('awardType').value;
-            if (!awardType) return;
-
-            const verbs = verbsByAward[awardType] || verbsByAward.ARCOM;
-            
-            document.getElementById('verbBank').innerHTML = verbs.map(v => 
-                `<span class="word-tag" onclick="insertWord('${v}')">${v}</span>`
-            ).join('');
-
-            document.getElementById('contextBank').innerHTML = contextPhrases.map(p => 
-                `<span class="word-tag" onclick="insertWord('${p}')">${p}</span>`
-            ).join('');
-
-            document.getElementById('impactBank').innerHTML = impactPhrases.map(p => 
-                `<span class="word-tag" onclick="insertWord('${p}')">${p}</span>`
-            ).join('');
-
-            document.getElementById('connectingBank').innerHTML = connectingWords.map(w => 
-                `<span class="word-tag" onclick="insertWord('${w}')">${w}</span>`
-            ).join('');
-        }
 
         function updateExamples() {
             const awardType = document.getElementById('awardType').value;
             if (!awardType || !awardData[awardType]) return;
 
-            const data = awardData[awardType];
-            document.getElementById('contextExample').innerHTML = `<strong>Example:</strong> ${data.contextExamples}`;
-            document.getElementById('actionExample').innerHTML = `<strong>Example:</strong> ${data.actionExamples}`;
-            document.getElementById('metricsExample').innerHTML = `<strong>Example:</strong> ${data.metricsExamples}`;
-            document.getElementById('impactExample').innerHTML = `<strong>Example:</strong> ${data.impactExamples}`;
-
-            const minAch = data.minAchievements;
+            const minAch = awardData[awardType].minAchievements;
             document.getElementById('minAchievementGuidance').innerHTML = `
                 <div class="policy-box">
                     <strong>Policy Requirement:</strong> ${awardType} requires minimum ${minAch} achievement${minAch > 1 ? 's' : ''}. 
                     You can add more using the button below.
                 </div>
             `;
-        }
-
-        function insertWord(word) {
-            if (!activeField) {
-                alert('Click in a text field first, then select words from the word bank');
-                return;
-            }
-
-            const start = activeField.selectionStart;
-            const end = activeField.selectionEnd;
-            const text = activeField.value;
-            
-            const before = text.substring(0, start);
-            const after = text.substring(end);
-            
-            // Add space if needed
-            const needsSpaceBefore = before.length > 0 && before[before.length - 1] !== ' ';
-            const needsSpaceAfter = after.length > 0 && after[0] !== ' ' && after[0] !== ',' && after[0] !== '.';
-            
-            activeField.value = before + (needsSpaceBefore ? ' ' : '') + word + (needsSpaceAfter ? ' ' : '') + after;
-            
-            // Set cursor position
-            const newPos = start + word.length + (needsSpaceBefore ? 1 : 0) + (needsSpaceAfter ? 1 : 0);
-            activeField.setSelectionRange(newPos, newPos);
-            activeField.focus();
         }
 
         function generateAchievement() {
@@ -1023,121 +1055,119 @@
         function buildTacticalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
             // AAM: Direct, focused, single clear achievement
             
-            let sentence1 = '';
-            if (context && context.toLowerCase().includes('as ')) {
-                // Context already has "as" - use it directly
-                sentence1 = `${verb} ${actionDetail} ${context}`.trim();
-            } else if (context) {
-                // Add "while serving" or "as"
-                sentence1 = `${verb} ${actionDetail} ${context}`.trim();
+            // Build opening based on context structure
+            let opening = '';
+            if (context.toLowerCase().startsWith('as ') || context.toLowerCase().startsWith('while serving as')) {
+                opening = `${verb} ${actionDetail} ${context}`;
+            } else if (context.toLowerCase().includes('during ') || context.toLowerCase().includes('throughout ')) {
+                opening = `${verb} ${actionDetail} ${context}`;
             } else {
-                sentence1 = `${verb} ${actionDetail}`.trim();
+                opening = `Serving ${context}, ${verb.toLowerCase()} ${actionDetail}`;
             }
             
-            // Add metrics as second sentence
-            let sentence2 = '';
-            if (metrics) {
-                sentence2 = `${pronoun} ${metrics}`;
-                
-                // Add impact
-                if (impact) {
-                    sentence2 += `, ${impact.toLowerCase()}`;
+            // Build results sentence
+            let results = '';
+            if (metrics && impact) {
+                // Check if metrics already forms a complete clause
+                if (metrics.toLowerCase().startsWith('he ') || metrics.toLowerCase().startsWith('she ')) {
+                    results = `${metrics}, ${impact.toLowerCase()}`;
+                } else {
+                    results = `${pronoun} ${metrics}, ${impact.toLowerCase()}`;
                 }
-                sentence2 += '.';
+            } else if (metrics) {
+                results = `${pronoun} ${metrics}`;
             } else if (impact) {
-                sentence2 = `${possessive} efforts ${impact.toLowerCase()}.`;
+                results = `${possessive} efforts ${impact.toLowerCase()}`;
             }
             
-            return `${sentence1}. ${sentence2}`;
+            return `${opening}. ${results}.`;
         }
 
         function buildOperationalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
             // ARCOM: Leadership + multi-element impact
             
-            let sentence1 = `${verb} ${actionDetail}`;
-            if (context) {
-                sentence1 += ` ${context}`;
-            }
-            
-            // Add transitional phrase and metrics
-            let sentence2 = '';
-            if (metrics) {
-                sentence2 = `${pronoun} ${metrics}`;
-            }
-            
-            // Add impact with strengthening language
-            let sentence3 = '';
-            if (impact) {
-                if (sentence2) {
-                    sentence3 = `${possessive} leadership ${impact.toLowerCase()}, significantly enhancing mission effectiveness`;
-                } else {
-                    sentence3 = `${possessive} efforts ${impact.toLowerCase()}`;
-                }
-            }
-            
-            if (sentence2 && sentence3) {
-                return `${sentence1}. ${sentence2}. ${sentence3}.`;
-            } else if (sentence2) {
-                return `${sentence1}. ${sentence2}, ${impact.toLowerCase()}.`;
+            // Build opening with leadership emphasis
+            let opening = '';
+            if (context.toLowerCase().startsWith('as ')) {
+                opening = `${verb} ${actionDetail} ${context}`;
+            } else if (context) {
+                opening = `Serving ${context}, ${verb.toLowerCase()} ${actionDetail}`;
             } else {
-                return `${sentence1}, ${impact.toLowerCase()}.`;
+                opening = `${verb} ${actionDetail}`;
             }
+            
+            // Add metrics with impact
+            let body = '';
+            if (metrics && impact) {
+                if (metrics.toLowerCase().startsWith('he ') || metrics.toLowerCase().startsWith('she ')) {
+                    body = `${metrics}, directly ${impact.toLowerCase()}`;
+                } else {
+                    body = `${pronoun} ${metrics}, directly ${impact.toLowerCase()}`;
+                }
+            } else if (metrics) {
+                body = `${pronoun} ${metrics}`;
+            }
+            
+            // Add strengthening conclusion
+            let conclusion = `${possessive} leadership significantly enhanced mission effectiveness and unit readiness`;
+            
+            return `${opening}. ${body}. ${conclusion}.`;
         }
 
         function buildStrategicAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
             // MSM: Systems + enterprise impact
             
-            let opening = `${verb} ${actionDetail}`;
-            if (context) {
-                opening += ` ${context}`;
-            }
-            opening += ' by establishing effective processes and standardizing execution';
-            
-            let body = '';
-            if (metrics) {
-                body = `${possessive} efforts ${metrics.toLowerCase()}`;
-            }
-            
-            let closing = '';
-            if (impact) {
-                closing = `directly ${impact.toLowerCase()} and strengthening operational effectiveness across the formation`;
-            }
-            
-            if (body && closing) {
-                return `${opening}. ${body}, ${closing}.`;
-            } else if (body) {
-                return `${opening}. ${body}.`;
+            // Strategic opening
+            let opening = '';
+            if (context.toLowerCase().startsWith('across ') || context.toLowerCase().startsWith('throughout ')) {
+                opening = `${verb} ${actionDetail} ${context}, establishing effective processes and standardizing execution`;
+            } else if (context) {
+                opening = `${verb} ${actionDetail} ${context} by establishing critical processes and standardizing execution`;
             } else {
-                return `${opening}.`;
+                opening = `${verb} ${actionDetail}, establishing effective processes and standardizing execution`;
             }
+            
+            // Strategic impact
+            let body = '';
+            if (metrics && impact) {
+                if (metrics.toLowerCase().startsWith('he ') || metrics.toLowerCase().startsWith('she ')) {
+                    body = `${metrics}, directly ${impact.toLowerCase()} and strengthening operational effectiveness across the formation`;
+                } else {
+                    body = `${possessive} efforts ${metrics.toLowerCase()}, directly ${impact.toLowerCase()} and strengthening operational effectiveness across the formation`;
+                }
+            } else if (metrics) {
+                body = `${possessive} efforts ${metrics.toLowerCase()}, strengthening operational effectiveness across the formation`;
+            }
+            
+            return `${opening}. ${body}.`;
         }
 
         function buildTransformationalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
             // LOM: Visionary + enduring impact
             
-            let opening = `${verb} ${actionDetail}`;
-            if (context) {
-                opening += ` ${context}`;
-            }
-            opening += ', establishing enduring standards and processes that transformed organizational capability';
-            
-            let body = '';
-            if (metrics) {
-                body = `${possessive} strategic leadership ${metrics.toLowerCase()}`;
-            }
-            
-            let closing = '';
-            if (impact) {
-                closing = `creating ${impact.toLowerCase()} and setting the strategic direction for future operations`;
-            }
-            
-            if (body && closing) {
-                return `${opening}. ${body}, ${closing}.`;
-            } else if (body) {
-                return `${opening}. ${body}.`;
+            // Transformational opening
+            let opening = '';
+            if (context.toLowerCase().startsWith('across ') || context.toLowerCase().startsWith('throughout ')) {
+                opening = `${verb} ${actionDetail} ${context}, establishing enduring standards and processes that transformed organizational capability`;
+            } else if (context) {
+                opening = `${verb} ${actionDetail} ${context}, establishing enduring standards and processes that transformed organizational capability`;
             } else {
-                return `${opening}.`;
+                opening = `${verb} ${actionDetail}, establishing enduring standards and processes that transformed organizational capability`;
             }
+            
+            // Strategic leadership impact
+            let body = '';
+            if (metrics && impact) {
+                if (metrics.toLowerCase().startsWith('he ') || metrics.toLowerCase().startsWith('she ')) {
+                    body = `${metrics}, creating ${impact.toLowerCase()} and setting strategic direction for future operations`;
+                } else {
+                    body = `${possessive} strategic leadership ${metrics.toLowerCase()}, creating ${impact.toLowerCase()} and setting strategic direction for future operations`;
+                }
+            } else if (metrics) {
+                body = `${possessive} strategic vision ${metrics.toLowerCase()}, setting the foundation for sustained organizational excellence`;
+            }
+            
+            return `${opening}. ${body}.`;
         }
 
         function polishText(text) {
