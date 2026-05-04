@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Award Builder - Free Professional Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: #4CAF50;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            margin-bottom: 30px;
+        }
+
+        .step-header h2 {
+            color: #1e3c72;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .step-header .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .policy-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .policy-box strong {
+            color: #856404;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .info-box strong {
+            color: #0c5460;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .label-hint {
+            font-weight: 400;
+            color: #666;
+            font-size: 13px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .example {
+            background: #f8f9fa;
+            border-left: 3px solid #6c757d;
+            padding: 10px 15px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #495057;
+            border-radius: 4px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .word-bank {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .word-bank h3 {
+            color: #1e3c72;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .word-category {
+            margin-bottom: 20px;
+        }
+
+        .word-category h4 {
+            color: #495057;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .word-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word-tag {
+            background: white;
+            border: 1px solid #ced4da;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #333;
+        }
+
+        .word-tag:hover {
+            background: #1e3c72;
+            color: white;
+            border-color: #1e3c72;
+            transform: translateY(-2px);
+        }
+
+        .achievement-preview {
+            background: #e7f3ff;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .achievement-preview h3 {
+            color: #1565c0;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .achievement-preview p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .achievement-list {
+            margin-top: 30px;
+        }
+
+        .achievement-item {
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .achievement-item strong {
+            color: #155724;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .citation-box {
+            background: #fff;
+            border: 3px solid #1e3c72;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            font-size: 13px;
+        }
+
+        .validation-message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .validation-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .validation-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .validation-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1e3c72;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .add-achievement-btn {
+            background: #17a2b8;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .add-achievement-btn:hover {
+            background: #138496;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+
+        .edit-btn {
+            background: #ffc107;
+            color: #333;
+            padding: 8px 16px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .edit-btn:hover {
+            background: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎖️ Army Award Builder</h1>
+            <p>Professional tool for creating regulation-compliant military award citations</p>
+            <span class="badge">✓ 100% FREE • NO ACCOUNT REQUIRED • WORKS OFFLINE</span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Step 1: Award Setup -->
+            <div class="step active" data-step="1">
+                <div class="step-header">
+                    <h2>Step 1: Award Information</h2>
+                    <p class="subtitle">Basic information about the Soldier and award type</p>
+                </div>
+
+                <div class="info-box">
+                    <strong>🎯 How This Works:</strong> 
+                    <p style="margin-top: 8px; font-size: 14px;">This tool generates professional, regulation-compliant achievements instantly. For maximum quality, use the <strong>"Enhance with Free AI"</strong> button after generation - it creates a custom prompt you can paste into Claude.ai, ChatGPT, or Gemini (all 100% free) to get field-grade quality output.</p>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="rank">Rank <span class="required">*</span></label>
+                        <select id="rank">
+                            <option value="">Select rank...</option>
+                            <optgroup label="Enlisted">
+                                <option value="PVT">PVT - Private</option>
+                                <option value="PV2">PV2 - Private 2</option>
+                                <option value="PFC">PFC - Private First Class</option>
+                                <option value="SPC">SPC - Specialist</option>
+                                <option value="CPL">CPL - Corporal</option>
+                                <option value="SGT">SGT - Sergeant</option>
+                                <option value="SSG">SSG - Staff Sergeant</option>
+                                <option value="SFC">SFC - Sergeant First Class</option>
+                                <option value="MSG">MSG - Master Sergeant</option>
+                                <option value="1SG">1SG - First Sergeant</option>
+                                <option value="SGM">SGM - Sergeant Major</option>
+                                <option value="CSM">CSM - Command Sergeant Major</option>
+                            </optgroup>
+                            <optgroup label="Warrant Officers">
+                                <option value="WO1">WO1 - Warrant Officer 1</option>
+                                <option value="CW2">CW2 - Chief Warrant Officer 2</option>
+                                <option value="CW3">CW3 - Chief Warrant Officer 3</option>
+                                <option value="CW4">CW4 - Chief Warrant Officer 4</option>
+                                <option value="CW5">CW5 - Chief Warrant Officer 5</option>
+                            </optgroup>
+                            <optgroup label="Officers">
+                                <option value="2LT">2LT - Second Lieutenant</option>
+                                <option value="1LT">1LT - First Lieutenant</option>
+                                <option value="CPT">CPT - Captain</option>
+                                <option value="MAJ">MAJ - Major</option>
+                                <option value="LTC">LTC - Lieutenant Colonel</option>
+                                <option value="COL">COL - Colonel</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Gender (for pronouns) <span class="required">*</span></label>
+                        <select id="sex">
+                            <option value="">Select...</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" placeholder="John">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" placeholder="Smith">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="awardType">Award Type <span class="required">*</span></label>
+                    <select id="awardType">
+                        <option value="">Select award type...</option>
+                        <option value="AAM">Army Achievement Medal (AAM)</option>
+                        <option value="ARCOM">Army Commendation Medal (ARCOM)</option>
+                        <option value="MSM">Meritorious Service Medal (MSM)</option>
+                        <option value="LOM">Legion of Merit (LOM)</option>
+                    </select>
+                </div>
+
+                <div id="awardGuidance"></div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date <span class="required">*</span></label>
+                        <input type="date" id="startDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">End Date <span class="required">*</span></label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position/Duty Title <span class="required">*</span></label>
+                    <input type="text" id="position" placeholder="Medical Readiness Officer">
+                    <div class="example">Example: Platoon Sergeant, Operations Officer, Squad Leader</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="unit">Unit <span class="required">*</span></label>
+                    <input type="text" id="unit" placeholder="7230th Medical Support Unit">
+                    <div class="example">Example: HHC, 1-504th Infantry Battalion</div>
+                </div>
+
+                <div class="button-group">
+                    <div></div>
+                    <button class="btn-primary" onclick="nextStep()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 2-N: Achievement Builder -->
+            <div class="step" data-step="2">
+                <div class="step-header">
+                    <h2>Step 2: Build Achievement <span id="currentAchNumber">1</span></h2>
+                    <p class="subtitle">Answer these questions to build a strong, regulation-compliant achievement</p>
+                </div>
+
+                <div id="minAchievementGuidance"></div>
+
+                <div class="form-group">
+                    <label>1. What was the scope or context?</label>
+                    <span class="label-hint">Where/when did this happen? Keep it brief - just the setting.</span>
+                    <textarea id="achContext" rows="2" placeholder="as Range Officer-in-Charge for the battalion"></textarea>
+                    <div class="example" id="contextExample"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>2. What specific actions did the Soldier take?</label>
+                    <span class="label-hint">Start with a strong verb. Describe what they actually did.</span>
+                    <textarea id="achAction" rows="3" placeholder="Planned and executed weapons qualification operations, coordinating with range safety officers to ensure zero safety incidents"></textarea>
+                    <div class="example" id="actionExample"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>3. What measurable results were achieved?</label>
+                    <span class="label-hint">Give specific numbers, percentages, quantities. Be concrete.</span>
+                    <textarea id="achMetrics" rows="2" placeholder="qualified 300 Soldiers with 250 achieving expert marksmanship"></textarea>
+                    <div class="example" id="metricsExample"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>4. What was the mission impact?</label>
+                    <span class="label-hint">Why did this matter? Connect to readiness, mission, or unit capability.</span>
+                    <textarea id="achImpact" rows="2" placeholder="enhanced battalion weapons readiness and combat capability"></textarea>
+                    <div class="example" id="impactExample"></div>
+                </div>
+
+                <!-- Word Bank -->
+                <div class="word-bank">
+                    <h3>📝 Word Bank - Click to Insert</h3>
+                    
+                    <div class="word-category">
+                        <h4>Action Verbs</h4>
+                        <div class="word-tags" id="verbBank"></div>
+                    </div>
+
+                    <div class="word-category">
+                        <h4>Context/Scope Phrases</h4>
+                        <div class="word-tags" id="contextBank"></div>
+                    </div>
+
+                    <div class="word-category">
+                        <h4>Impact Phrases</h4>
+                        <div class="word-tags" id="impactBank"></div>
+                    </div>
+
+                    <div class="word-category">
+                        <h4>Connecting Words</h4>
+                        <div class="word-tags" id="connectingBank"></div>
+                    </div>
+                </div>
+
+                <div class="loading" id="aiLoading">
+                    <div class="spinner"></div>
+                    <p>Generating professional achievement statement...</p>
+                </div>
+
+                <div id="achievementPreview"></div>
+
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="previousStep()">← Previous</button>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn-success" onclick="generateAchievement()">Generate Achievement</button>
+                        <button class="btn-primary" onclick="nextStep()" id="nextAchBtn" disabled>Next →</button>
+                    </div>
+                </div>
+
+                <button class="add-achievement-btn" onclick="addAnotherAchievement()" id="addAchBtn" style="display: none;">
+                    + Add Another Achievement
+                </button>
+            </div>
+
+            <!-- Final Step: Review & Export -->
+            <div class="step" data-step="final">
+                <div class="step-header">
+                    <h2>Final Review</h2>
+                    <p class="subtitle">Review your complete award package</p>
+                </div>
+
+                <div id="validationMessages"></div>
+
+                <h3 style="color: #1e3c72; margin-bottom: 15px;">Achievements</h3>
+                <div id="finalAchievementsList"></div>
+
+                <h3 style="color: #1e3c72; margin-top: 30px; margin-bottom: 15px;">Citation</h3>
+                <div class="citation-box" id="finalCitation"></div>
+
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="previousStep()">← Previous</button>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn-success" onclick="copyToClipboard()">📋 Copy All Text</button>
+                        <button class="btn-primary" onclick="startOver()">🔄 Start New Award</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let currentStep = 1;
+        let achievements = [];
+        let currentAchievementIndex = 0;
+        let totalAchievements = 1;
+        let activeField = null;
+
+        // Award-specific data
+        const awardData = {
+            AAM: {
+                guidance: `<div class="policy-box">
+                    <strong>AR 600-8-22 Guidance:</strong> The Army Achievement Medal (AAM) is awarded for sustained meritorious service or specific acts of achievement. Typically awarded for impact at the team to company level, 30 days to 12 months of service, or single significant achievements. <strong>Minimum: 1-2 achievements recommended.</strong>
+                </div>`,
+                minAchievements: 1,
+                maxAchievements: 3,
+                tone: 'tactical',
+                contextExamples: 'As Squad Leader, During Annual Training, While serving as...',
+                actionExamples: 'Led 10 Soldiers through weapons qualification, coordinated supply operations',
+                metricsExamples: '95% pass rate, zero safety incidents, managed $50K in equipment',
+                impactExamples: 'Enhanced squad readiness, improved training effectiveness'
+            },
+            ARCOM: {
+                guidance: `<div class="policy-box">
+                    <strong>AR 600-8-22 Guidance:</strong> The Army Commendation Medal (ARCOM) is awarded for sustained meritorious service or achievement. Typically recognizes impact at the company to battalion level, 3-12 months of service, or notable achievements affecting multiple units. <strong>Minimum: 2-3 achievements required.</strong>
+                </div>`,
+                minAchievements: 2,
+                maxAchievements: 4,
+                tone: 'operational',
+                contextExamples: 'As Platoon Sergeant across multiple operations, Throughout deployment to...',
+                actionExamples: 'Coordinated training for 50 Soldiers, managed complex logistics operations',
+                metricsExamples: 'Improved readiness from 75% to 90%, zero losses, supported 200+ personnel',
+                impactExamples: 'Significantly enhanced battalion readiness, enabled mission success'
+            },
+            MSM: {
+                guidance: `<div class="policy-box">
+                    <strong>AR 600-8-22 Guidance:</strong> The Meritorious Service Medal (MSM) is awarded for outstanding non-combat meritorious achievement or service. Recognizes sustained superior performance, typically 12+ months, with impact at battalion level and above or affecting multiple organizations. <strong>Minimum: 3-4 achievements required.</strong>
+                </div>`,
+                minAchievements: 3,
+                maxAchievements: 5,
+                tone: 'strategic',
+                contextExamples: 'Across 30 downtrace units spanning multiple states, Throughout the Western Medical Area Readiness Support Group',
+                actionExamples: 'Transformed medical readiness systems, integrated five enterprise platforms, orchestrated multi-unit operations',
+                metricsExamples: 'Increased readiness from 72% to 82%, enabled deployment of 215 Soldiers across 7 units, supported 500+ personnel',
+                impactExamples: 'Enhanced commander decision-making at echelon, strengthened operational effectiveness across the Army Medical Enterprise'
+            },
+            LOM: {
+                guidance: `<div class="policy-box">
+                    <strong>AR 600-8-22 Guidance:</strong> The Legion of Merit (LOM) is awarded for exceptionally meritorious conduct in the performance of outstanding services. Reserved for field-grade and senior officers/NCOs with multi-year sustained excellence and strategic-level impact. <strong>Minimum: 4+ achievements required.</strong>
+                </div>`,
+                minAchievements: 4,
+                maxAchievements: 6,
+                tone: 'strategic-senior',
+                contextExamples: 'Across the entire division, Throughout three years of strategic operations',
+                actionExamples: 'Revolutionized enterprise systems, established division-wide standards, led strategic transformation',
+                metricsExamples: 'Transformed readiness across 10,000+ Soldiers, established programs affecting entire command',
+                impactExamples: 'Set enduring standards for the Army, created strategic capabilities enabling future operations'
+            }
+        };
+
+        // Word banks by award type
+        const verbsByAward = {
+            AAM: ['Led', 'Coordinated', 'Executed', 'Managed', 'Supervised', 'Conducted', 'Completed', 'Achieved', 'Maintained', 'Ensured', 'Supported', 'Assisted', 'Organized', 'Delivered', 'Performed', 'Trained', 'Operated', 'Processed', 'Administered', 'Facilitated'],
+            ARCOM: ['Directed', 'Orchestrated', 'Spearheaded', 'Implemented', 'Established', 'Coordinated', 'Led', 'Developed', 'Enhanced', 'Improved', 'Strengthened', 'Executed', 'Synchronized', 'Integrated', 'Optimized', 'Managed', 'Supervised', 'Oversaw', 'Built', 'Created'],
+            MSM: ['Transformed', 'Engineered', 'Integrated', 'Orchestrated', 'Established', 'Directed', 'Revolutionized', 'Spearheaded', 'Synchronized', 'Optimized', 'Strengthened', 'Enhanced', 'Modernized', 'Institutionalized', 'Championed', 'Shaped', 'Built', 'Developed', 'Led', 'Drove'],
+            LOM: ['Revolutionized', 'Transformed', 'Pioneered', 'Architected', 'Established', 'Led', 'Directed', 'Commanded', 'Shaped', 'Defined', 'Instituted', 'Built', 'Created', 'Forged', 'Engineered', 'Elevated', 'Advanced', 'Championed']
+        };
+
+        const contextPhrases = [
+            'across the formation',
+            'throughout the organization',
+            'spanning multiple units',
+            'during critical operations',
+            'under demanding conditions',
+            'while serving as',
+            'across geographically dispersed elements',
+            'throughout the deployment',
+            'within a complex environment',
+            'supporting enterprise operations',
+            'across subordinate units',
+            'during high-tempo operations',
+            'throughout the training cycle',
+            'in support of',
+            'across the command',
+            'across the battalion',
+            'within the brigade',
+            'supporting the mission'
+        ];
+
+        const impactPhrases = [
+            'enhanced readiness',
+            'improved mission effectiveness',
+            'strengthened operational capability',
+            'enabled mission success',
+            'significantly enhanced',
+            'directly contributed to',
+            'increased efficiency',
+            'improved performance',
+            'elevated standards',
+            'ensured mission accomplishment',
+            'strengthened unit cohesion',
+            'enhanced commander confidence',
+            'improved force protection',
+            'enabled informed decision-making',
+            'supported mission requirements',
+            'improved organizational effectiveness',
+            'enhanced operational readiness',
+            'strengthened team performance',
+            'ensured operational continuity',
+            'directly supported',
+            'improved training effectiveness',
+            'strengthened unit capability'
+        ];
+
+        const connectingWords = [
+            'resulting in',
+            'enabling',
+            'ensuring',
+            'directly supporting',
+            'which led to',
+            'thereby',
+            'ultimately',
+            'significantly',
+            'consistently',
+            'effectively',
+            'directly',
+            'successfully'
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Award type change handler
+            document.getElementById('awardType').addEventListener('change', function() {
+                const awardType = this.value;
+                if (awardType && awardData[awardType]) {
+                    document.getElementById('awardGuidance').innerHTML = awardData[awardType].guidance;
+                    updateWordBank();
+                    updateExamples();
+                }
+            });
+
+            // Track active field for word bank insertion
+            ['achContext', 'achAction', 'achMetrics', 'achImpact'].forEach(id => {
+                const field = document.getElementById(id);
+                if (field) {
+                    field.addEventListener('focus', function() {
+                        activeField = this;
+                    });
+                }
+            });
+        });
+
+        function updateWordBank() {
+            const awardType = document.getElementById('awardType').value;
+            if (!awardType) return;
+
+            const verbs = verbsByAward[awardType] || verbsByAward.ARCOM;
+            
+            document.getElementById('verbBank').innerHTML = verbs.map(v => 
+                `<span class="word-tag" onclick="insertWord('${v}')">${v}</span>`
+            ).join('');
+
+            document.getElementById('contextBank').innerHTML = contextPhrases.map(p => 
+                `<span class="word-tag" onclick="insertWord('${p}')">${p}</span>`
+            ).join('');
+
+            document.getElementById('impactBank').innerHTML = impactPhrases.map(p => 
+                `<span class="word-tag" onclick="insertWord('${p}')">${p}</span>`
+            ).join('');
+
+            document.getElementById('connectingBank').innerHTML = connectingWords.map(w => 
+                `<span class="word-tag" onclick="insertWord('${w}')">${w}</span>`
+            ).join('');
+        }
+
+        function updateExamples() {
+            const awardType = document.getElementById('awardType').value;
+            if (!awardType || !awardData[awardType]) return;
+
+            const data = awardData[awardType];
+            document.getElementById('contextExample').innerHTML = `<strong>Example:</strong> ${data.contextExamples}`;
+            document.getElementById('actionExample').innerHTML = `<strong>Example:</strong> ${data.actionExamples}`;
+            document.getElementById('metricsExample').innerHTML = `<strong>Example:</strong> ${data.metricsExamples}`;
+            document.getElementById('impactExample').innerHTML = `<strong>Example:</strong> ${data.impactExamples}`;
+
+            const minAch = data.minAchievements;
+            document.getElementById('minAchievementGuidance').innerHTML = `
+                <div class="policy-box">
+                    <strong>Policy Requirement:</strong> ${awardType} requires minimum ${minAch} achievement${minAch > 1 ? 's' : ''}. 
+                    You can add more using the button below.
+                </div>
+            `;
+        }
+
+        function insertWord(word) {
+            if (!activeField) {
+                alert('Click in a text field first, then select words from the word bank');
+                return;
+            }
+
+            const start = activeField.selectionStart;
+            const end = activeField.selectionEnd;
+            const text = activeField.value;
+            
+            const before = text.substring(0, start);
+            const after = text.substring(end);
+            
+            // Add space if needed
+            const needsSpaceBefore = before.length > 0 && before[before.length - 1] !== ' ';
+            const needsSpaceAfter = after.length > 0 && after[0] !== ' ' && after[0] !== ',' && after[0] !== '.';
+            
+            activeField.value = before + (needsSpaceBefore ? ' ' : '') + word + (needsSpaceAfter ? ' ' : '') + after;
+            
+            // Set cursor position
+            const newPos = start + word.length + (needsSpaceBefore ? 1 : 0) + (needsSpaceAfter ? 1 : 0);
+            activeField.setSelectionRange(newPos, newPos);
+            activeField.focus();
+        }
+
+        function generateAchievement() {
+            const context = document.getElementById('achContext').value.trim();
+            const action = document.getElementById('achAction').value.trim();
+            const metrics = document.getElementById('achMetrics').value.trim();
+            const impact = document.getElementById('achImpact').value.trim();
+
+            // VALIDATION: Check for minimum input quality
+            const validation = validateInputs(context, action, metrics, impact);
+            if (!validation.valid) {
+                alert(validation.message);
+                return;
+            }
+
+            document.getElementById('aiLoading').classList.add('active');
+            document.getElementById('achievementPreview').innerHTML = '';
+
+            // Small delay to show loading animation
+            setTimeout(() => {
+                const achievement = generateWithTemplate(context, action, metrics, impact);
+                
+                achievements[currentAchievementIndex] = {
+                    context, action, metrics, impact, text: achievement
+                };
+
+                displayAchievementPreview(achievement);
+                document.getElementById('nextAchBtn').disabled = false;
+                document.getElementById('addAchBtn').style.display = 'block';
+                document.getElementById('aiLoading').classList.remove('active');
+            }, 800);
+        }
+
+        function validateInputs(context, action, metrics, impact) {
+            if (!context || !action || !metrics || !impact) {
+                return {
+                    valid: false,
+                    message: 'Please fill in all four fields before generating'
+                };
+            }
+
+            // Check if action has a verb
+            const words = action.trim().split(/\s+/);
+            if (words.length < 3) {
+                return {
+                    valid: false,
+                    message: 'Action needs more detail. Describe what the Soldier actually did (e.g., "Coordinated training operations for 50 Soldiers")'
+                };
+            }
+
+            // Check if metrics has numbers
+            if (!metrics.match(/\d/)) {
+                return {
+                    valid: false,
+                    message: 'Metrics should include specific numbers or quantities (e.g., "250 Soldiers", "95% pass rate", "$50K")'
+                };
+            }
+
+            // Check if user just copy-pasted from word bank
+            if (action.split(' ').length < 5) {
+                return {
+                    valid: false,
+                    message: 'Action needs more detail - don\'t just select words from the bank. Describe the full action taken.'
+                };
+            }
+
+            return { valid: true };
+        }
+
+        function generateWithTemplate(context, action, metrics, impact) {
+            const awardType = document.getElementById('awardType').value;
+            const sex = document.getElementById('sex').value;
+            
+            const pronoun = sex === 'F' ? 'She' : 'He';
+            const possessive = sex === 'F' ? 'Her' : 'His';
+
+            // STEP 1: INTELLIGENT CLEANING - Remove duplicate words, fix grammar
+            const cleanContext = cleanText(context);
+            const cleanAction = cleanText(action);
+            const cleanMetrics = cleanText(metrics);
+            const cleanImpact = cleanText(impact);
+
+            // STEP 2: EXTRACT KEY VERB from action (if user typed full sentence)
+            const actionVerb = extractLeadVerb(cleanAction);
+            const actionRest = cleanAction.replace(actionVerb, '').trim();
+
+            // STEP 3: BUILD PROFESSIONAL ACHIEVEMENT
+            let achievement = '';
+
+            if (awardType === 'AAM') {
+                // Tactical: Simple, direct, one clear accomplishment
+                achievement = buildTacticalAchievement(actionVerb, actionRest, cleanContext, cleanMetrics, cleanImpact, pronoun, possessive);
+                
+            } else if (awardType === 'ARCOM') {
+                // Operational: Multi-unit impact, leadership emphasis
+                achievement = buildOperationalAchievement(actionVerb, actionRest, cleanContext, cleanMetrics, cleanImpact, pronoun, possessive);
+                
+            } else if (awardType === 'MSM') {
+                // Strategic: Enterprise impact, systems thinking
+                achievement = buildStrategicAchievement(actionVerb, actionRest, cleanContext, cleanMetrics, cleanImpact, pronoun, possessive);
+                
+            } else if (awardType === 'LOM') {
+                // Strategic Senior: Transformational impact
+                achievement = buildTransformationalAchievement(actionVerb, actionRest, cleanContext, cleanMetrics, cleanImpact, pronoun, possessive);
+            }
+
+            // STEP 4: FINAL POLISH
+            achievement = polishText(achievement);
+
+            return achievement;
+        }
+
+        function cleanText(text) {
+            return text
+                .replace(/\s+/g, ' ')
+                .replace(/^\s*(and|the|a|an)\s+/i, '')
+                .trim();
+        }
+
+        function extractLeadVerb(actionText) {
+            const words = actionText.trim().split(/\s+/);
+            const firstWord = words[0];
+            
+            // Check if first word is a strong verb
+            const allVerbs = [].concat(
+                verbsByAward.AAM,
+                verbsByAward.ARCOM,
+                verbsByAward.MSM,
+                verbsByAward.LOM
+            );
+            
+            if (allVerbs.includes(firstWord)) {
+                return firstWord;
+            }
+            
+            // Try to find first verb in sentence
+            for (let word of words) {
+                if (allVerbs.includes(word)) {
+                    return word;
+                }
+            }
+            
+            // Default: return first word and hope for best
+            return firstWord;
+        }
+
+        function buildTacticalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
+            // AAM: Direct, focused, single clear achievement
+            
+            let sentence1 = '';
+            if (context && context.toLowerCase().includes('as ')) {
+                // Context already has "as" - use it directly
+                sentence1 = `${verb} ${actionDetail} ${context}`.trim();
+            } else if (context) {
+                // Add "while serving" or "as"
+                sentence1 = `${verb} ${actionDetail} ${context}`.trim();
+            } else {
+                sentence1 = `${verb} ${actionDetail}`.trim();
+            }
+            
+            // Add metrics as second sentence
+            let sentence2 = '';
+            if (metrics) {
+                sentence2 = `${pronoun} ${metrics}`;
+                
+                // Add impact
+                if (impact) {
+                    sentence2 += `, ${impact.toLowerCase()}`;
+                }
+                sentence2 += '.';
+            } else if (impact) {
+                sentence2 = `${possessive} efforts ${impact.toLowerCase()}.`;
+            }
+            
+            return `${sentence1}. ${sentence2}`;
+        }
+
+        function buildOperationalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
+            // ARCOM: Leadership + multi-element impact
+            
+            let sentence1 = `${verb} ${actionDetail}`;
+            if (context) {
+                sentence1 += ` ${context}`;
+            }
+            
+            // Add transitional phrase and metrics
+            let sentence2 = '';
+            if (metrics) {
+                sentence2 = `${pronoun} ${metrics}`;
+            }
+            
+            // Add impact with strengthening language
+            let sentence3 = '';
+            if (impact) {
+                if (sentence2) {
+                    sentence3 = `${possessive} leadership ${impact.toLowerCase()}, significantly enhancing mission effectiveness`;
+                } else {
+                    sentence3 = `${possessive} efforts ${impact.toLowerCase()}`;
+                }
+            }
+            
+            if (sentence2 && sentence3) {
+                return `${sentence1}. ${sentence2}. ${sentence3}.`;
+            } else if (sentence2) {
+                return `${sentence1}. ${sentence2}, ${impact.toLowerCase()}.`;
+            } else {
+                return `${sentence1}, ${impact.toLowerCase()}.`;
+            }
+        }
+
+        function buildStrategicAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
+            // MSM: Systems + enterprise impact
+            
+            let opening = `${verb} ${actionDetail}`;
+            if (context) {
+                opening += ` ${context}`;
+            }
+            opening += ' by establishing effective processes and standardizing execution';
+            
+            let body = '';
+            if (metrics) {
+                body = `${possessive} efforts ${metrics.toLowerCase()}`;
+            }
+            
+            let closing = '';
+            if (impact) {
+                closing = `directly ${impact.toLowerCase()} and strengthening operational effectiveness across the formation`;
+            }
+            
+            if (body && closing) {
+                return `${opening}. ${body}, ${closing}.`;
+            } else if (body) {
+                return `${opening}. ${body}.`;
+            } else {
+                return `${opening}.`;
+            }
+        }
+
+        function buildTransformationalAchievement(verb, actionDetail, context, metrics, impact, pronoun, possessive) {
+            // LOM: Visionary + enduring impact
+            
+            let opening = `${verb} ${actionDetail}`;
+            if (context) {
+                opening += ` ${context}`;
+            }
+            opening += ', establishing enduring standards and processes that transformed organizational capability';
+            
+            let body = '';
+            if (metrics) {
+                body = `${possessive} strategic leadership ${metrics.toLowerCase()}`;
+            }
+            
+            let closing = '';
+            if (impact) {
+                closing = `creating ${impact.toLowerCase()} and setting the strategic direction for future operations`;
+            }
+            
+            if (body && closing) {
+                return `${opening}. ${body}, ${closing}.`;
+            } else if (body) {
+                return `${opening}. ${body}.`;
+            } else {
+                return `${opening}.`;
+            }
+        }
+
+        function polishText(text) {
+            return text
+                // Fix spacing
+                .replace(/\s+/g, ' ')
+                .replace(/\s+\./g, '.')
+                .replace(/\s+,/g, ',')
+                .replace(/\.\./g, '.')
+                .replace(/,,/g, ',')
+                // Fix duplicate words
+                .replace(/\b(\w+)\s+\1\b/gi, '$1')
+                // Fix "he he" or "she she"
+                .replace(/\b(he|she|his|her)\s+\1\b/gi, '$1')
+                // Fix awkward phrasing
+                .replace(/\s+and\s+and\s+/g, ' and ')
+                .replace(/\s+by\s+by\s+/g, ' by ')
+                .replace(/\s+while\s+while\s+/g, ' while ')
+                // Capitalize first letter
+                .trim()
+                .replace(/^./, c => c.toUpperCase());
+        }
+
+        function displayAchievementPreview(achievement) {
+            document.getElementById('achievementPreview').innerHTML = `
+                <div class="achievement-preview">
+                    <h3>✓ Generated Achievement</h3>
+                    <p>${achievement}</p>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="edit-btn" onclick="editAchievement()">Edit</button>
+                        <button class="btn-success" onclick="enhanceWithAI()" style="padding: 8px 16px; font-size: 14px;">
+                            ⚡ Enhance with Free AI
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function enhanceWithAI() {
+            const achievement = achievements[currentAchievementIndex].text;
+            const awardType = document.getElementById('awardType').value;
+            const rank = document.getElementById('rank').value;
+            const sex = document.getElementById('sex').value;
+            
+            const pronoun = sex === 'F' ? 'She' : 'He';
+            const possessive = sex === 'F' ? 'Her' : 'His';
+
+            // Build the AI prompt
+            const prompt = buildAIEnhancementPrompt(achievement, awardType, pronoun, possessive, rank);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(prompt).then(() => {
+                showAIInstructions();
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = prompt;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showAIInstructions();
+                } catch (e) {
+                    alert('Could not copy. Please manually copy the prompt shown below.');
+                }
+                document.body.removeChild(textarea);
+            });
+        }
+
+        function buildAIEnhancementPrompt(achievement, awardType, pronoun, possessive, rank) {
+            const toneGuide = {
+                'AAM': 'tactical level - focused on individual/team contribution',
+                'ARCOM': 'operational level - leadership across multiple elements',
+                'MSM': 'strategic/enterprise level - sustained impact across organizations',
+                'LOM': 'strategic senior level - transformational organizational impact'
+            };
+
+            const wordCount = {
+                'AAM': '60-75',
+                'ARCOM': '70-85',
+                'MSM': '80-95',
+                'LOM': '90-110'
+            };
+
+            return `I need you to enhance this Army ${awardType} achievement to professional, regulation-compliant quality.
+
+CURRENT ACHIEVEMENT:
+${achievement}
+
+REQUIREMENTS:
+- Keep ALL facts, numbers, and metrics exactly as written
+- Enhance sentence structure and flow
+- Use stronger, more appropriate military verbs
+- Write at ${toneGuide[awardType]} tone
+- Target length: ${wordCount[awardType]} words
+- Use pronouns: ${pronoun}/${possessive}
+- Follow AR 600-8-22 writing style: clear, concise, impactful
+- Do NOT add facts or metrics that aren't in the original
+- Do NOT use generic phrases like "duties" or "responsibilities"
+
+OUTPUT INSTRUCTIONS:
+Write ONLY the enhanced achievement paragraph. No preamble, no explanation, no commentary.`;
+        }
+
+        function showAIInstructions() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                padding: 20px;
+            `;
+
+            modal.innerHTML = `
+                <div style="background: white; padding: 40px; border-radius: 12px; max-width: 600px; max-height: 90vh; overflow-y: auto;">
+                    <h2 style="color: #1e3c72; margin-bottom: 20px;">✓ Prompt Copied!</h2>
+                    
+                    <div style="background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin-bottom: 25px; border-radius: 4px;">
+                        <strong style="color: #0c5460;">Next Steps:</strong>
+                    </div>
+
+                    <div style="font-size: 15px; line-height: 1.6; color: #333;">
+                        <p style="margin-bottom: 15px;"><strong>1. Open a free AI tool</strong> (choose one):</p>
+                        <ul style="margin-left: 20px; margin-bottom: 20px;">
+                            <li style="margin-bottom: 8px;">
+                                <a href="https://claude.ai" target="_blank" style="color: #1e3c72; font-weight: 600;">Claude.ai</a> 
+                                <span style="color: #666;">(recommended - best for military writing)</span>
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <a href="https://chatgpt.com" target="_blank" style="color: #1e3c72; font-weight: 600;">ChatGPT.com</a>
+                                <span style="color: #666;">(also works great)</span>
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <a href="https://gemini.google.com" target="_blank" style="color: #1e3c72; font-weight: 600;">Gemini</a>
+                                <span style="color: #666;">(Google's AI)</span>
+                            </li>
+                        </ul>
+
+                        <p style="margin-bottom: 15px;"><strong>2. Paste the prompt</strong> (already copied to your clipboard)</p>
+                        <p style="margin-left: 20px; color: #666; font-size: 14px; margin-bottom: 20px;">
+                            Just press <strong>Ctrl+V</strong> (or Cmd+V on Mac) in the chat box
+                        </p>
+
+                        <p style="margin-bottom: 15px;"><strong>3. Copy the enhanced achievement</strong></p>
+                        <p style="margin-left: 20px; color: #666; font-size: 14px; margin-bottom: 20px;">
+                            The AI will give you a professional, enhanced version in seconds
+                        </p>
+
+                        <p style="margin-bottom: 15px;"><strong>4. Paste it back here</strong></p>
+                        <p style="margin-left: 20px; color: #666; font-size: 14px; margin-bottom: 20px;">
+                            Use the "Edit" button to replace the current achievement
+                        </p>
+                    </div>
+
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-top: 25px; border-radius: 4px;">
+                        <strong style="color: #856404;">💡 Pro Tip:</strong>
+                        <p style="color: #856404; font-size: 14px; margin-top: 8px;">
+                            All three AI tools are 100% free. No credit card required. If you don't have an account, 
+                            it takes 30 seconds to sign up with your email.
+                        </p>
+                    </div>
+
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: #1e3c72; color: white; padding: 12px 30px; border: none; 
+                                   border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; 
+                                   margin-top: 30px; width: 100%;">
+                        Got It - Let's Enhance!
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            
+            // Close on background click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        function editAchievement() {
+            const currentText = achievements[currentAchievementIndex].text;
+            const newText = prompt('Edit achievement:', currentText);
+            if (newText && newText.trim()) {
+                achievements[currentAchievementIndex].text = newText.trim();
+                displayAchievementPreview(newText.trim());
+            }
+        }
+
+        function addAnotherAchievement() {
+            const awardType = document.getElementById('awardType').value;
+            const maxAch = awardData[awardType].maxAchievements;
+            
+            if (totalAchievements >= maxAch) {
+                alert(`Maximum ${maxAch} achievements for ${awardType}`);
+                return;
+            }
+
+            totalAchievements++;
+            nextStep();
+        }
+
+        function nextStep() {
+            const steps = document.querySelectorAll('.step');
+            
+            // Validate current step
+            if (currentStep === 1) {
+                if (!validateStep1()) return;
+                currentStep = 2;
+            } else if (currentStep === 2) {
+                // Check if achievement is generated
+                if (!achievements[currentAchievementIndex]) {
+                    alert('Please generate the achievement before proceeding');
+                    return;
+                }
+                
+                currentAchievementIndex++;
+                
+                // Check if we need more achievements
+                const awardType = document.getElementById('awardType').value;
+                const minRequired = awardData[awardType].minAchievements;
+                
+                if (currentAchievementIndex < minRequired || 
+                    (currentAchievementIndex < totalAchievements && achievements.length < totalAchievements)) {
+                    // Stay on step 2, but clear for next achievement
+                    clearAchievementFields();
+                    document.getElementById('currentAchNumber').textContent = currentAchievementIndex + 1;
+                    document.getElementById('nextAchBtn').disabled = true;
+                    document.getElementById('addAchBtn').style.display = 'none';
+                    document.getElementById('achievementPreview').innerHTML = '';
+                    updateProgress();
+                    return;
+                } else {
+                    // Move to final step
+                    currentStep = 'final';
+                    generateFinalReview();
+                }
+            }
+
+            // Update display
+            steps.forEach(step => step.classList.remove('active'));
+            const nextStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+            if (nextStepEl) {
+                nextStepEl.classList.add('active');
+            }
+
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function previousStep() {
+            if (currentStep === 2 && currentAchievementIndex > 0) {
+                currentAchievementIndex--;
+                document.getElementById('currentAchNumber').textContent = currentAchievementIndex + 1;
+                
+                const prev = achievements[currentAchievementIndex];
+                if (prev) {
+                    document.getElementById('achContext').value = prev.context;
+                    document.getElementById('achAction').value = prev.action;
+                    document.getElementById('achMetrics').value = prev.metrics;
+                    document.getElementById('achImpact').value = prev.impact;
+                    displayAchievementPreview(prev.text);
+                    document.getElementById('nextAchBtn').disabled = false;
+                }
+            } else if (currentStep === 2 && currentAchievementIndex === 0) {
+                currentStep = 1;
+            } else if (currentStep === 'final') {
+                currentStep = 2;
+                currentAchievementIndex = achievements.length - 1;
+            }
+
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+            
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function validateStep1() {
+            const required = ['rank', 'sex', 'firstName', 'lastName', 'awardType', 'startDate', 'endDate', 'position', 'unit'];
+            
+            for (let id of required) {
+                if (!document.getElementById(id).value) {
+                    alert('Please fill in all required fields');
+                    document.getElementById(id).focus();
+                    return false;
+                }
+            }
+
+            const start = new Date(document.getElementById('startDate').value);
+            const end = new Date(document.getElementById('endDate').value);
+            if (end <= start) {
+                alert('End date must be after start date');
+                return false;
+            }
+
+            return true;
+        }
+
+        function clearAchievementFields() {
+            document.getElementById('achContext').value = '';
+            document.getElementById('achAction').value = '';
+            document.getElementById('achMetrics').value = '';
+            document.getElementById('achImpact').value = '';
+        }
+
+        function generateFinalReview() {
+            let achListHTML = '';
+            achievements.forEach((ach, idx) => {
+                achListHTML += `
+                    <div class="achievement-item">
+                        <strong>Achievement ${idx + 1}</strong>
+                        <p>${ach.text}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('finalAchievementsList').innerHTML = achListHTML;
+
+            const citation = generateCitation();
+            document.getElementById('finalCitation').innerHTML = citation;
+
+            const validation = validateAward();
+            let validationHTML = '';
+            
+            if (validation.errors.length > 0) {
+                validationHTML += `<div class="validation-message validation-error">
+                    <strong>⚠️ Issues Found:</strong><br>${validation.errors.join('<br>')}
+                </div>`;
+            }
+            
+            if (validation.warnings.length > 0) {
+                validationHTML += `<div class="validation-message validation-warning">
+                    <strong>💡 Recommendations:</strong><br>${validation.warnings.join('<br>')}
+                </div>`;
+            }
+            
+            if (validation.errors.length === 0) {
+                validationHTML += `<div class="validation-message validation-success">
+                    <strong>✓ Award Package Looks Good!</strong> All requirements met. Ready for submission.
+                </div>`;
+            }
+            
+            document.getElementById('validationMessages').innerHTML = validationHTML;
+        }
+
+        function generateCitation() {
+            const rank = document.getElementById('rank').value;
+            const lastName = document.getElementById('lastName').value.toUpperCase();
+            const awardType = document.getElementById('awardType').value;
+            const position = document.getElementById('position').value;
+            const unit = document.getElementById('unit').value;
+            const sex = document.getElementById('sex').value;
+            
+            const startDate = formatMilitaryDate(document.getElementById('startDate').value);
+            const endDate = formatMilitaryDate(document.getElementById('endDate').value);
+
+            const pronoun = sex === 'F' ? 'HERSELF' : 'HIMSELF';
+            const possessive = sex === 'F' ? 'HER' : 'HIS';
+
+            const fullRank = expandRank(rank);
+
+            let opening = '';
+            if (awardType === 'AAM' || awardType === 'ARCOM') {
+                opening = `FOR OUTSTANDING ${awardType === 'AAM' ? 'ACHIEVEMENT' : 'SERVICE'} AS THE ${position.toUpperCase()}, ${unit.toUpperCase()}, FROM ${startDate} TO ${endDate}.`;
+            } else if (awardType === 'MSM') {
+                opening = `FOR MERITORIOUS SERVICE WHILE SERVING IN POSITIONS OF INCREASING RESPONSIBILITY FROM ${startDate} THROUGH ${endDate}.`;
+            } else if (awardType === 'LOM') {
+                opening = `FOR EXCEPTIONALLY MERITORIOUS CONDUCT IN THE PERFORMANCE OF OUTSTANDING SERVICES FROM ${startDate} TO ${endDate}.`;
+            }
+
+            let body = `${fullRank} ${lastName} DISTINGUISHED ${pronoun === 'HIMSELF' ? 'HIMSELF' : 'HERSELF'} THROUGH EXCEPTIONAL LEADERSHIP, PROFESSIONALISM, AND UNWAVERING COMMITMENT TO MISSION ACCOMPLISHMENT. `;
+            
+            achievements.forEach((ach, idx) => {
+                if (idx < 3) {
+                    const condensed = ach.text.split('.')[0];
+                    body += condensed.toUpperCase() + '. ';
+                }
+            });
+
+            const closing = `${fullRank} ${lastName}'S DEVOTION TO DUTY AND PROFESSIONALISM REFLECT GREAT CREDIT UPON ${pronoun}, THE ARMY RESERVE MEDICAL COMMAND, AND THE UNITED STATES ARMY RESERVE.`;
+
+            return `${opening}<br><br>${body}<br><br>${closing}`;
+        }
+
+        function formatMilitaryDate(dateStr) {
+            const date = new Date(dateStr);
+            const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 
+                          'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            return `${day} ${month} ${year}`;
+        }
+
+        function expandRank(abbr) {
+            const ranks = {
+                'PVT': 'PRIVATE', 'PV2': 'PRIVATE', 'PFC': 'PRIVATE FIRST CLASS',
+                'SPC': 'SPECIALIST', 'CPL': 'CORPORAL', 'SGT': 'SERGEANT',
+                'SSG': 'STAFF SERGEANT', 'SFC': 'SERGEANT FIRST CLASS',
+                'MSG': 'MASTER SERGEANT', '1SG': 'FIRST SERGEANT',
+                'SGM': 'SERGEANT MAJOR', 'CSM': 'COMMAND SERGEANT MAJOR',
+                'WO1': 'WARRANT OFFICER', 'CW2': 'CHIEF WARRANT OFFICER TWO',
+                'CW3': 'CHIEF WARRANT OFFICER THREE', 'CW4': 'CHIEF WARRANT OFFICER FOUR',
+                'CW5': 'CHIEF WARRANT OFFICER FIVE', '2LT': 'SECOND LIEUTENANT',
+                '1LT': 'FIRST LIEUTENANT', 'CPT': 'CAPTAIN', 'MAJ': 'MAJOR',
+                'LTC': 'LIEUTENANT COLONEL', 'COL': 'COLONEL'
+            };
+            return ranks[abbr] || abbr;
+        }
+
+        function validateAward() {
+            const errors = [];
+            const warnings = [];
+            const awardType = document.getElementById('awardType').value;
+            const minRequired = awardData[awardType].minAchievements;
+
+            if (achievements.length < minRequired) {
+                errors.push(`${awardType} requires minimum ${minRequired} achievements. You have ${achievements.length}.`);
+            }
+
+            achievements.forEach((ach, idx) => {
+                if (!ach.text.match(/\d/)) {
+                    warnings.push(`Achievement ${idx + 1} lacks quantifiable metrics (numbers/percentages).`);
+                }
+                if (ach.text.length < 60) {
+                    warnings.push(`Achievement ${idx + 1} seems short (${ach.text.length} chars). Consider adding more detail.`);
+                }
+            });
+
+            return { errors, warnings };
+        }
+
+        function updateProgress() {
+            const awardType = document.getElementById('awardType').value;
+            let totalSteps = 1;
+            if (awardType) {
+                totalSteps += awardData[awardType].minAchievements;
+            }
+            totalSteps += 1;
+
+            let progress = 0;
+            if (currentStep === 1) progress = (1 / totalSteps) * 100;
+            else if (currentStep === 2) progress = ((1 + currentAchievementIndex + 1) / totalSteps) * 100;
+            else if (currentStep === 'final') progress = 100;
+
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function copyToClipboard() {
+            let fullText = '=== ACHIEVEMENTS ===\n\n';
+            achievements.forEach((ach, idx) => {
+                fullText += `Achievement ${idx + 1}:\n${ach.text}\n\n`;
+            });
+            
+            fullText += '\n=== CITATION ===\n\n';
+            fullText += document.getElementById('finalCitation').innerText;
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                alert('✓ Copied to clipboard! You can now paste into Word or DA Form 638.');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = fullText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('✓ Copied to clipboard! You can now paste into Word or DA Form 638.');
+                } catch (e) {
+                    alert('Could not copy to clipboard. Please manually select and copy the text.');
+                }
+                document.body.removeChild(textarea);
+            });
+        }
+
+        function startOver() {
+            if (confirm('Start a new award? All current data will be lost.')) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
